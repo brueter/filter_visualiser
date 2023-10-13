@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
 import OptionSet from "../OptionSet/index.tsx";
+import "./types.ts";
 
 function OptionCollection() {
   const [gaussian, setGaussian] = useState<Gaussian>({
