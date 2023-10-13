@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import OptionSet from './components/OptionCategory.tsx';
-import './Option.tsx';
+import './types/Option.tsx';
 
 function App() {
   const [options, setOptions] = useState({
@@ -61,7 +61,6 @@ function App() {
         max: 100,
         step: 1,
         value: options.gaussian.sigma,
-        visible: true,
         handle: (e) => {
           setOptions({
             ...options,
@@ -74,12 +73,42 @@ function App() {
       },
     ],
     dropdowns: [],
-    checkbox: [],
+    checkboxes: [
+      {
+        name: "Visibility",
+        value: options.gaussian.visible,
+        visible: options.gaussian.visible,
+        handle: (e) => {
+          setOptions({
+            ...options,
+            gaussian: {
+              ...options.gaussian,
+              visible: e.target.checked
+            }
+          })
+        }
+      }
+
+    ],
+    color: {
+      h: 0,
+      s: 100,
+      l: 50
+    },
   }}
 />
 
   return (
     <div id="options">
+        {opt}
+        {opt}
+        {opt}
+        {opt}
+        {opt}
+        {opt}
+        {opt}
+        {opt}
+        {opt}
         {opt}
     </div>
   )

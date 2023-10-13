@@ -1,7 +1,8 @@
 type Option = {
     sliders?: Slider[],
     dropdowns?: Dropdown[],
-    checkbox?: CheckBox[]
+    checkboxes?: CheckBox[],
+    color: HSL
 }
 
 type Slider = {
@@ -10,7 +11,6 @@ type Slider = {
     max?: number,
     value?: number,
     step?: number,
-    visible?: boolean,
     handle: (e:any) => void,
 }
 
@@ -19,14 +19,18 @@ type Dropdown = {
     max: number,
     value: number,
     step: number,
-    visible: boolean
+    handle: (e:any) => void,
 }
 
 type CheckBox = {
     name: string,
-    min: number,
-    max: number,
-    value: number,
-    step: number,
-    visible: boolean
+    value: boolean,
+    visible: boolean,
+    handle: (e:any) => void,
+}
+
+type HSL = {
+    h: number,
+    s: number,
+    l: number
 }
