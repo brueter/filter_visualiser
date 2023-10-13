@@ -2,3 +2,13 @@
   margin: 0 auto;
   text-align: center;
 }
+
+.graph {
+  margin-inline: 5%;
+  max-width: 100%;
+  height: calc(100vh - 16px);
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: stretch;
+}

@@ -6,7 +6,8 @@ interface Gaussian {
 interface Butterworth {
   n: number;
   wn: number;
-  type: string[];
+  types: string[];
+  selected: number;
   visible: boolean;
 }
 
@@ -14,7 +15,8 @@ interface Chebychev {
   order: number;
   rp: number;
   wn: number;
-  type: string[];
+  types: string[];
+  selected: number;
   visible: boolean;
 }
 
@@ -31,7 +33,8 @@ interface Kalman {
 }
 
 interface Wavelet {
-  type: string[];
+  types: string[];
+  selected: number;
   level: number;
   visible: boolean;
 }
@@ -44,6 +47,5 @@ interface Ema {
 interface Option {
   sliders?: Slider[];
   dropdowns?: Dropdown[];
-  checkboxes?: CheckBox[];
   color: HSL;
 }

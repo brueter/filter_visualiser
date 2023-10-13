@@ -1,4 +1,5 @@
 interface Slider {
+  title: string;
   name: string;
   min?: number;
   max?: number;
@@ -8,17 +9,10 @@ interface Slider {
 }
 
 interface Dropdown {
-  min: number;
-  max: number;
-  value: number;
-  step: number;
-  handle: (e: any) => void;
-}
-
-interface CheckBox {
+  title: string;
   name: string;
-  value: boolean;
-  visible: boolean;
+  value: number;
+  options: string[];
   handle: (e: any) => void;
 }
 

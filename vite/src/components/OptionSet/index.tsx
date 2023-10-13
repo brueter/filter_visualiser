@@ -13,50 +13,51 @@ const OptionSet = ({ title, options }: { title: string; options: Option }) => {
         <div className="option">
           <span>{title}</span>
         </div>
-        <div className="option">
-          {options.sliders?.map((option: any) => (
-            <div key={option.name} className="sliderContainer">
-              <label htmlFor={option.name}>{option.name}:</label>
-              <input
-                type="range"
-                id={option.name}
-                name={option.name}
-                min={option.min ?? 0}
-                max={option.max ?? 0}
-                value={option.value ?? 0}
-                step={option.step ?? 0}
-                onChange={(event) => option.handle(event)}
-                style={{
-                  accentColor: `hsl(${options.color.h}, ${options.color.s}%, ${options.color.l}%)`,
-                }}
-              />
-              <input
-                type="text"
-                value={option.value ?? 0}
-                onChange={(event) => option.handle(event)}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="option">
-          {options.checkboxes?.map((option: any) => (
-            <div key={option.name} className="checkboxContainer">
-              <label htmlFor={option.name}>{option.name}:</label>
-              <input
-                type="checkbox"
-                id={option.name}
-                name={option.name}
-                checked={option.visible ?? 0}
-                onChange={(event) => {
-                  option.handle(event);
-                }}
-                style={{
-                  accentColor: `hsl(${options.color.h}, ${options.color.s}%, ${options.color.l}%)`,
-                }}
-              />
-            </div>
-          ))}
-        </div>
+        {options.sliders?.map((option: Slider) => (
+          <div key={option.name} className="sliderContainer option">
+            <label htmlFor={`${option.title}-${option.name}`}>
+              {option.name}:
+            </label>
+            <input
+              className="slider"
+              type="range"
+              id={`${option.title}-${option.name}`}
+              name={option.name}
+              min={option.min ?? 0}
+              max={option.max ?? 0}
+              value={option.value ?? 0}
+              step={option.step ?? 0}
+              onChange={(event) => option.handle(event)}
+              style={{
+                accentColor: `hsl(${options.color.h}, ${options.color.s}%, ${options.color.l}%)`,
+              }}
+            />
+            <input
+              aria-label={`${option.title}-${option.name}-input`}
+              type="text"
+              value={option.value ?? 0}
+              onChange={(event) => option.handle(event)}
+            />
+          </div>
+        ))}
+        {options.dropdowns?.map((option: Dropdown) => (
+          <div key={option.name} className="dropdownContainer option">
+            <label htmlFor={`${option.title}-${option.name}`}>
+              {option.name}:
+            </label>
+            <select
+              name={option.name}
+              id={`${option.title}-${option.name}`}
+              onChange={(event) => option.handle(event)}
+            >
+              {option.options.map((value: string) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
+          </div>
+        ))}
       </div>
     </>
   );
