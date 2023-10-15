@@ -60,7 +60,7 @@ function Graph() {
         data: chartData.data,
         backgroundColor: "black",
         borderColor: "black",
-        pointBorderColor: "aqua",
+        pointBorderColor: "black",
         borderWidth: 0.5,
       },
     ],

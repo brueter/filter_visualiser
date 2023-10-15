@@ -2,63 +2,14 @@ import { useState } from "react";
 import "./styles.css";
 import OptionSet from "../OptionSet/index.tsx";
 import "./types.ts";
+import {
+  useOptionState,
+  updateOptionState,
+  resetOptionState,
+} from "../../context/OptionContext.tsx";
 
 function OptionCollection() {
-  const [gaussian, setGaussian] = useState<Gaussian>({
-    sigma: 0,
-    visible: true,
-  });
-
-  const [butterworth, setButterworth] = useState<Butterworth>({
-    n: 0,
-    wn: 0,
-    types: ["low", "high"],
-    selected: 0,
-    visible: true,
-  });
-
-  const [chebychev, setChebychev] = useState<Chebychev>({
-    order: 0,
-    rp: 0,
-    wn: 0,
-    types: ["low", "high"],
-    selected: 0,
-    visible: true,
-  });
-
-  const [golay, setGolay] = useState<Golay>({
-    window: 0,
-    polyorder: 0,
-    visible: true,
-  });
-
-  const [kalman, setKalman] = useState<Kalman>({
-    pNoise: 0,
-    mNoise: 0,
-    visible: true,
-  });
-
-  const [wavelet, setWavelet] = useState<Wavelet>({
-    types: ["db1"],
-    selected: 0,
-    level: 0,
-    visible: true,
-  });
-
-  const [ema, setEma] = useState<Ema>({
-    span: 0,
-    visible: true,
-  });
-
-  const options: { [key: string]: { [key: string]: any } } = {
-    gaussian,
-    butterworth,
-    chebychev,
-    golay,
-    kalman,
-    wavelet,
-    ema,
-  };
+  const { state, dispatch } = useOptionState();
 
   const gaussianOptions = (
     <OptionSet
@@ -71,11 +22,10 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.gaussian.sigma,
+            value: state.gaussian.sigma,
             handle: (e) => {
-              setGaussian({
-                ...gaussian,
-                sigma: e.target.value,
+              updateOptionState(dispatch, {
+                gaussian: { ...state.gaussian, sigma: e.target.value },
               });
             },
           },
@@ -100,11 +50,10 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.butterworth.n,
+            value: state.butterworth.n,
             handle: (e) => {
-              setButterworth({
-                ...butterworth,
-                n: e.target.value,
+              updateOptionState(dispatch, {
+                butterworth: { ...state.butterworth, n: e.target.value },
               });
             },
           },
@@ -114,11 +63,10 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.butterworth.wn,
+            value: state.butterworth.wn,
             handle: (e) => {
-              setButterworth({
-                ...butterworth,
-                wn: e.target.value,
+              updateOptionState(dispatch, {
+                butterworth: { ...state.butterworth, wn: e.target.value },
               });
             },
           },
@@ -127,12 +75,14 @@ function OptionCollection() {
           {
             title: "Butterworth",
             name: "Type",
-            options: options.butterworth.types,
-            value: options.butterworth.selected,
+            options: state.butterworth.types,
+            value: state.butterworth.selected,
             handle: (e) => {
-              setButterworth({
-                ...butterworth,
-                selected: e.target.selectedIndex,
+              updateOptionState(dispatch, {
+                butterworth: {
+                  ...state.butterworth,
+                  selected: e.target.selectedIndex,
+                },
               });
             },
           },
@@ -157,11 +107,13 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.chebychev.order,
+            value: state.chebychev.order,
             handle: (e) => {
-              setChebychev({
-                ...chebychev,
-                order: e.target.value,
+              updateOptionState(dispatch, {
+                chebychev: {
+                  ...state.chebychev,
+                  order: e.target.value,
+                },
               });
             },
           },
@@ -170,12 +122,14 @@ function OptionCollection() {
           {
             title: "Chebychev",
             name: "Type",
-            options: options.chebychev.types,
-            value: options.chebychev.selected,
+            options: state.chebychev.types,
+            value: state.chebychev.selected,
             handle: (e) => {
-              setChebychev({
-                ...chebychev,
-                selected: e.target.selectedIndex,
+              updateOptionState(dispatch, {
+                chebychev: {
+                  ...state.chebychev,
+                  selected: e.target.selectedIndex,
+                },
               });
             },
           },
@@ -200,11 +154,13 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.golay.window,
+            value: state.golay.window,
             handle: (e) => {
-              setGolay({
-                ...golay,
-                window: e.target.value,
+              updateOptionState(dispatch, {
+                golay: {
+                  ...state.golay,
+                  window: e.target.value,
+                },
               });
             },
           },
@@ -214,11 +170,13 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.golay.polyorder,
+            value: state.golay.polyorder,
             handle: (e) => {
-              setGolay({
-                ...golay,
-                polyorder: e.target.value,
+              updateOptionState(dispatch, {
+                golay: {
+                  ...state.golay,
+                  polyorder: e.target.value,
+                },
               });
             },
           },
@@ -243,11 +201,13 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.kalman.pNoise,
+            value: state.kalman.pNoise,
             handle: (e) => {
-              setKalman({
-                ...kalman,
-                pNoise: e.target.value,
+              updateOptionState(dispatch, {
+                kalman: {
+                  ...state.kalman,
+                  pNoise: e.target.value,
+                },
               });
             },
           },
@@ -257,11 +217,13 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.kalman.mNoise,
+            value: state.kalman.mNoise,
             handle: (e) => {
-              setKalman({
-                ...kalman,
-                mNoise: e.target.value,
+              updateOptionState(dispatch, {
+                kalman: {
+                  ...state.kalman,
+                  mNoise: e.target.value,
+                },
               });
             },
           },
@@ -286,11 +248,13 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.wavelet.level,
+            value: state.wavelet.level,
             handle: (e) => {
-              setWavelet({
-                ...wavelet,
-                level: e.target.value,
+              updateOptionState(dispatch, {
+                wavelet: {
+                  ...state.wavelet,
+                  level: e.target.value,
+                },
               });
             },
           },
@@ -299,12 +263,14 @@ function OptionCollection() {
           {
             title: "Wavelet",
             name: "Type",
-            options: options.wavelet.types,
-            value: options.wavelet.selected,
+            options: state.wavelet.types,
+            value: state.wavelet.selected,
             handle: (e) => {
-              setWavelet({
-                ...wavelet,
-                selected: e.target.selectedIndex,
+              updateOptionState(dispatch, {
+                wavelet: {
+                  ...state.wavelet,
+                  selected: e.target.selectedIndex,
+                },
               });
             },
           },
@@ -329,11 +295,13 @@ function OptionCollection() {
             min: 0,
             max: 100,
             step: 1,
-            value: options.ema.span,
+            value: state.ema.span,
             handle: (e) => {
-              setEma({
-                ...ema,
-                span: e.target.value,
+              updateOptionState(dispatch, {
+                ema: {
+                  ...state.ema,
+                  span: e.target.value,
+                },
               });
             },
           },

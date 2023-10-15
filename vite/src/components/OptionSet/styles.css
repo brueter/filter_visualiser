@@ -54,7 +54,6 @@ label {
 .option input[type="range"] {
   -webkit-appearance: none;
   height: 7px;
-  background: grey;
   width: 0px;
   border-radius: 5px;
   flex: 1 1;

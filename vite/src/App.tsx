@@ -1,12 +1,15 @@
 import "./App.css";
 import OptionCollection from "./components/OptionCollection";
 import Graph from "./components/Graph";
+import { OptionStateProvider } from "./context/OptionContext";
 
 function App() {
   return (
     <>
-      <OptionCollection />
-      <Graph />
+      <OptionStateProvider>
+        <OptionCollection />
+        <Graph />
+      </OptionStateProvider>
     </>
   );
 }
