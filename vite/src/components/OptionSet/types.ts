@@ -1,5 +1,4 @@
 interface Slider {
-  title: string;
   name: string;
   min?: number;
   max?: number;
@@ -9,7 +8,6 @@ interface Slider {
 }
 
 interface Dropdown {
-  title: string;
   name: string;
   value: number;
   options: string[];

@@ -6,7 +6,6 @@ import {
   LinearScale,
   PointElement,
   Legend,
-  ChartConfiguration,
 } from "chart.js";
 import * as Papa from "papaparse";
 import ZoomPlugin from "chartjs-plugin-zoom";

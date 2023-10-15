@@ -45,6 +45,7 @@ interface Ema {
 }
 
 interface Option {
+  title: string;
   sliders?: Slider[];
   dropdowns?: Dropdown[];
   color: HSL;

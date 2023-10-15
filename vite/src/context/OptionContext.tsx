@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   createContext,
   useContext,
   useReducer,
   useMemo,
-  FC,
   ReactNode,
 } from "react";
 
@@ -110,7 +109,6 @@ export function resetOptionState(dispatch: React.Dispatch<Action>) {
 }
 
 /*example usage
-
  const { state, dispatch } = useOptionState();
 
   const handleUpdate = () => {
@@ -120,5 +118,4 @@ export function resetOptionState(dispatch: React.Dispatch<Action>) {
   const handleReset = () => {
     resetOptionState(dispatch);
   };
-
 */

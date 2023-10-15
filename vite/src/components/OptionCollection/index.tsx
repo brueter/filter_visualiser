@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./styles.css";
 import OptionSet from "../OptionSet/index.tsx";
 import "./types.ts";
@@ -13,19 +12,15 @@ function OptionCollection() {
 
   const gaussianOptions = (
     <OptionSet
-      title="Gaussian"
       options={{
+        title: "Gaussian",
         sliders: [
           {
-            title: "Gaussian",
             name: "Sigma",
-            min: 0,
-            max: 100,
-            step: 1,
             value: state.gaussian.sigma,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
-                gaussian: { ...state.gaussian, sigma: e.target.value },
+                gaussian: { ...state.gaussian, sigma: value },
               });
             },
           },
@@ -41,47 +36,38 @@ function OptionCollection() {
 
   const butterworthOptions = (
     <OptionSet
-      title="Butterworth"
       options={{
+        title: "Butterworth",
         sliders: [
           {
-            title: "Butterworth",
             name: "N",
-            min: 0,
-            max: 100,
-            step: 1,
             value: state.butterworth.n,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
-                butterworth: { ...state.butterworth, n: e.target.value },
+                butterworth: { ...state.butterworth, n: value },
               });
             },
           },
           {
-            title: "Butterworth",
             name: "Wn",
-            min: 0,
-            max: 100,
-            step: 1,
             value: state.butterworth.wn,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
-                butterworth: { ...state.butterworth, wn: e.target.value },
+                butterworth: { ...state.butterworth, wn: value },
               });
             },
           },
         ],
         dropdowns: [
           {
-            title: "Butterworth",
             name: "Type",
             options: state.butterworth.types,
             value: state.butterworth.selected,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 butterworth: {
                   ...state.butterworth,
-                  selected: e.target.selectedIndex,
+                  selected: value,
                 },
               });
             },
@@ -98,21 +84,17 @@ function OptionCollection() {
 
   const chebychevOptions = (
     <OptionSet
-      title="Chebychev"
       options={{
+        title: "Chebychev",
         sliders: [
           {
-            title: "Chebychev",
             name: "Order",
-            min: 0,
-            max: 100,
-            step: 1,
             value: state.chebychev.order,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 chebychev: {
                   ...state.chebychev,
-                  order: e.target.value,
+                  order: value,
                 },
               });
             },
@@ -120,15 +102,14 @@ function OptionCollection() {
         ],
         dropdowns: [
           {
-            title: "Chebychev",
             name: "Type",
             options: state.chebychev.types,
             value: state.chebychev.selected,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 chebychev: {
                   ...state.chebychev,
-                  selected: e.target.selectedIndex,
+                  selected: value,
                 },
               });
             },
@@ -145,37 +126,29 @@ function OptionCollection() {
 
   const golayOptions = (
     <OptionSet
-      title="Golay"
       options={{
+        title: "Golay",
         sliders: [
           {
-            title: "Golay",
             name: "Window",
-            min: 0,
-            max: 100,
-            step: 1,
             value: state.golay.window,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 golay: {
                   ...state.golay,
-                  window: e.target.value,
+                  window: value,
                 },
               });
             },
           },
           {
-            title: "Golay",
             name: "Polyorder",
-            min: 0,
-            max: 100,
-            step: 1,
             value: state.golay.polyorder,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 golay: {
                   ...state.golay,
-                  polyorder: e.target.value,
+                  polyorder: value,
                 },
               });
             },
@@ -192,37 +165,32 @@ function OptionCollection() {
 
   const kalmanOptions = (
     <OptionSet
-      title="Kalman"
       options={{
+        title: "Kalman",
         sliders: [
           {
-            title: "Kalman",
             name: "pNoise",
-            min: 0,
-            max: 100,
-            step: 1,
             value: state.kalman.pNoise,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 kalman: {
                   ...state.kalman,
-                  pNoise: e.target.value,
+                  pNoise: value,
                 },
               });
             },
           },
           {
-            title: "Kalman",
             name: "mNoise",
             min: 0,
             max: 100,
             step: 1,
             value: state.kalman.mNoise,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 kalman: {
                   ...state.kalman,
-                  mNoise: e.target.value,
+                  mNoise: value,
                 },
               });
             },
@@ -239,21 +207,17 @@ function OptionCollection() {
 
   const waveletOptions = (
     <OptionSet
-      title="Wavelet"
       options={{
+        title: "Wavelet",
         sliders: [
           {
-            title: "Wavelet",
             name: "Level",
-            min: 0,
-            max: 100,
-            step: 1,
             value: state.wavelet.level,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 wavelet: {
                   ...state.wavelet,
-                  level: e.target.value,
+                  level: value,
                 },
               });
             },
@@ -261,15 +225,14 @@ function OptionCollection() {
         ],
         dropdowns: [
           {
-            title: "Wavelet",
             name: "Type",
             options: state.wavelet.types,
             value: state.wavelet.selected,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 wavelet: {
                   ...state.wavelet,
-                  selected: e.target.selectedIndex,
+                  selected: value,
                 },
               });
             },
@@ -286,21 +249,17 @@ function OptionCollection() {
 
   const emaOptions = (
     <OptionSet
-      title="EMA"
       options={{
+        title: "EMA",
         sliders: [
           {
-            title: "EMA",
             name: "Span",
-            min: 0,
-            max: 100,
-            step: 1,
             value: state.ema.span,
-            handle: (e) => {
+            handle: (value) => {
               updateOptionState(dispatch, {
                 ema: {
                   ...state.ema,
-                  span: e.target.value,
+                  span: value,
                 },
               });
             },
