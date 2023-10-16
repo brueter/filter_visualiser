@@ -1,3 +1,4 @@
+import React from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -7,10 +8,10 @@ import {
   PointElement,
   Legend,
 } from "chart.js";
-import * as Papa from "papaparse";
 import ZoomPlugin from "chartjs-plugin-zoom";
-import { useState } from "react";
 import "./styles.css";
+import { useDataState } from "../../context/DataContext";
+import DataFilter from "../DataFilter";
 
 ChartJS.register({
   LineElement,
@@ -21,42 +22,33 @@ ChartJS.register({
   ZoomPlugin,
 });
 
-function Graph() {
-  const [chartData, setChartData] = useState<{
-    labels: string[];
-    data: number[];
-  }>({
-    labels: [],
-    data: [],
-  });
+const Graph = () => {
+  const { state } = useDataState();
 
-  function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (file) {
-      Papa.parse(file, {
-        header: true,
-        dynamicTyping: true,
-        complete: function (
-          results: Papa.ParseResult<{ time: string; data: number }>
-        ) {
-          const timeData = results.data.map((row) => row.time);
-          const dataData = results.data.map((row) => row.data);
-
-          setChartData({
-            labels: timeData,
-            data: dataData,
-          });
-        },
-      });
-    }
-  }
+  const labels: number[] = [...Array(state.raw.data.length).keys()];
 
   const data = {
-    labels: chartData.labels,
+    labels: labels,
     datasets: [
       {
+        label: "Gaussian",
+        data: state.gaussian.data,
+        backgroundColor: "red",
+        borderColor: "red",
+        pointBorderColor: "red",
+        borderWidth: 2,
+      },
+      {
+        label: "Butterworth",
+        data: state.butterworth.data,
+        backgroundColor: "orange",
+        borderColor: "orange",
+        pointBorderColor: "orange",
+        borderWidth: 2,
+      },
+      {
         label: "Raw",
-        data: chartData.data,
+        data: state.raw.data,
         backgroundColor: "black",
         borderColor: "black",
         pointBorderColor: "black",
@@ -98,12 +90,12 @@ function Graph() {
 
   return (
     <>
-      <input type="file" onChange={handleFileUpload} accept=".csv" />
       <div className="graph">
         <Line data={data} options={options}></Line>
       </div>
+      <DataFilter filterType={"gaussian"} />
     </>
   );
-}
+};
 
-export default Graph;
+export default React.memo(Graph);

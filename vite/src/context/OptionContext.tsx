@@ -1,5 +1,4 @@
-import React from "react";
-import {
+import React, {
   createContext,
   useContext,
   useReducer,
@@ -7,49 +6,58 @@ import {
   ReactNode,
 } from "react";
 
-const initialState = {
-  gaussian: {
-    sigma: 0,
-    visible: true,
-  },
-  butterworth: {
-    n: 0,
-    wn: 0,
-    types: ["low", "high"],
-    selected: 0,
-    visible: true,
-  },
-  chebychev: {
-    order: 0,
-    rp: 0,
-    wn: 0,
-    types: ["low", "high"],
-    selected: 0,
-    visible: true,
-  },
-  golay: {
-    window: 0,
-    polyorder: 0,
-    visible: true,
-  },
-  kalman: {
-    pNoise: 0,
-    mNoise: 0,
-    visible: true,
-  },
-  wavelet: {
-    types: ["db1"],
-    selected: 0,
-    level: 0,
-    visible: true,
-  },
-  ema: {
-    span: 0,
-    visible: true,
-  },
+const initialGaussianState = {
+  sigma: 0,
+  visible: true,
 };
 
-type State = typeof initialState;
+const initialButterworthState = {
+  n: 1,
+  wn: 0,
+  types: ["low", "high"],
+  selected: 0,
+  visible: true,
+};
+
+const initialChebychevState = {
+  order: 0,
+  rp: 0,
+  wn: 0,
+  types: ["low", "high"],
+  selected: 0,
+  visible: true,
+};
+const initialGolayState = {
+  window: 0,
+  polyorder: 0,
+  visible: true,
+};
+const initialKalmanState = {
+  pNoise: 0,
+  mNoise: 0,
+  visible: true,
+};
+const initialWaveletState = {
+  types: ["db1"],
+  selected: 0,
+  level: 0,
+  visible: true,
+};
+const initialEmaState = {
+  span: 0,
+  visible: true,
+};
+
+type State = {
+  gaussian: typeof initialGaussianState;
+  butterworth: typeof initialButterworthState;
+  chebychev: typeof initialChebychevState;
+  golay: typeof initialGolayState;
+  kalman: typeof initialKalmanState;
+  wavelet: typeof initialWaveletState;
+  ema: typeof initialEmaState;
+};
+
 type Action = { type: "UPDATE"; payload: Partial<State> } | { type: "RESET" };
 
 const OptionStateContext = createContext<
@@ -74,6 +82,16 @@ function optionStateReducer(state: State, action: Action): State {
 interface OptionStateProviderProps {
   children: ReactNode;
 }
+
+const initialState: State = {
+  gaussian: initialGaussianState,
+  butterworth: initialButterworthState,
+  chebychev: initialChebychevState,
+  golay: initialGolayState,
+  kalman: initialKalmanState,
+  wavelet: initialWaveletState,
+  ema: initialEmaState,
+};
 
 export function OptionStateProvider({ children }: OptionStateProviderProps) {
   const [state, dispatch] = useReducer(optionStateReducer, initialState);
@@ -107,15 +125,3 @@ export function updateOptionState(
 export function resetOptionState(dispatch: React.Dispatch<Action>) {
   dispatch({ type: "RESET" });
 }
-
-/*example usage
- const { state, dispatch } = useOptionState();
-
-  const handleUpdate = () => {
-    updateOptionState(dispatch, { gaussian: { sigma: 1 } });
-  };
-
-  const handleReset = () => {
-    resetOptionState(dispatch);
-  };
-*/

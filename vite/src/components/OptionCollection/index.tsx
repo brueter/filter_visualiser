@@ -40,6 +40,7 @@ function OptionCollection() {
         title: "Butterworth",
         sliders: [
           {
+            min: 1,
             name: "N",
             value: state.butterworth.n,
             handle: (value) => {
@@ -49,6 +50,9 @@ function OptionCollection() {
             },
           },
           {
+            min: 0,
+            max: 1,
+            step: 0.01,
             name: "Wn",
             value: state.butterworth.wn,
             handle: (value) => {
